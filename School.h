@@ -9,7 +9,7 @@ class School
 {
 	public:
 		School();
-		~School();
+		~School() = default;
 		
 		StatusType AddStudent(int StudentID, int Grade, int Power);
 		StatusType AddTeam(int TeamID);

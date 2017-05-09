@@ -36,7 +36,10 @@ class Students
 		bool RemoveStudent(int student_id);
 		bool RemoveStudent(Student* student);
 		Student* GetStudent(int student_id);
+		Student* GetAllStudents(int * length);
+		Student* GetAllStudentsByPower(int * length);
 		int GetStrongestStudentID();
+		
 		
 	private:
 	
@@ -44,11 +47,25 @@ class Students
 			public:
 				PowerIDPair(int id, int power) : id(id), power(power)
 				{ }
-				PowerIDPair(PowerIDPair& other) = default;
+				//PowerIDPair(PowerIDPair& other) = default;
 				~PowerIDPair() = default;
 				PowerIDPair& operator=(const PowerIDPair& other) = default;
+				int GetID() const { return this->id; }
 				
-				bool operator>(const PowerIDPair& other)
+				bool operator==(const PowerIDPair& other) const
+				{
+					return ((this->power == other.power) &&
+						(this->id == other.id));
+				}
+				bool operator<(const PowerIDPair& other) const
+				{
+					if (this->power == other.power) {
+						return (this->id > other.id);
+					} else {
+						return (this->power < other.power);
+					}
+				}
+				bool operator>(const PowerIDPair& other) const
 				{
 					if (this->power == other.power) {
 						return (this->id < other.id);
@@ -73,6 +90,7 @@ class Team
 		
 		bool AddStudent(Student* s);
 		bool RemoveStudent(Student* s);
+		int GetStrongestStudentID();
 		
 	private:
 		int id;
